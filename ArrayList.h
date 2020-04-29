@@ -92,13 +92,37 @@ namespace nilolib {
             return m_array[index];
         };
 
-
         T &get(int index) {
             return m_array[index];
         };
 
         int size() const {
             return m_size;
+        }
+
+        bool operator>(const ArrayList<T> &other) const {
+            return size() > other.size();
+        }
+
+        bool operator>=(const ArrayList<T> &other) const {
+            return size() >= other.size();
+        }
+
+        bool operator<(const ArrayList<T> &other) const {
+            return size() < other.size();
+        }
+
+        bool operator<=(const ArrayList<T> &other) const {
+            return size() <= other.size();
+        }
+
+        bool operator==(const ArrayList<T> &other) const {
+            std::cout << "==" << std::endl;
+            return size() == other.size();
+        }
+
+        bool operator!=(const ArrayList<T> &other) const {
+            return size() != other.size();
         }
 
     private:
@@ -118,6 +142,7 @@ namespace nilolib {
             m_array = new_array;
         };
     };
+
 
     template<typename T>
     class ArrayList<T>::iterator : public std::iterator<std::random_access_iterator_tag, T> {
@@ -181,7 +206,7 @@ namespace nilolib {
             return *this;
         }
 
-        inline iterator operator+(int offset) const{
+        inline iterator operator+(int offset) const {
             iterator tmp(*this);
             tmp.m_pos += offset;
             return tmp;
@@ -193,7 +218,7 @@ namespace nilolib {
             return tmp;
         }
 
-        inline int operator-(const iterator other) const{
+        inline int operator-(const iterator other) const {
             return m_pos - other.m_pos;
         }
 
@@ -221,7 +246,7 @@ namespace nilolib {
 
     template<typename T>
     std::ostream &operator<<(std::ostream &os, ArrayList<T> &list) {
-        for (auto value : list) {
+        for (T &value : list) {
             os << value << ",";
         }
         return os << "\b";

@@ -15,7 +15,11 @@ iostream
 -
 algorithm
 -
-string
+vector
+-
+set
+-
+unordered_set
 -
 ArrayList.h
 /Users/niloneto/CLionProjects/HelloWorld/ArrayList.h
