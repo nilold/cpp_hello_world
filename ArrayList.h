@@ -6,7 +6,7 @@
 namespace nilolib {
     class ArrayList {
     public:
-        class iterator {
+    class iterator : public std::iterator<std::random_access_iterator_tag, int>{
         private:
             ArrayList *m_arrayList{nullptr};
             int m_pos{0};
@@ -138,7 +138,7 @@ namespace nilolib {
         }
 
         iterator end() noexcept {
-            return iterator(*this, size() - 1);
+            return iterator(*this, size()-1);
         }
 
         void add(const int &value) {
@@ -194,9 +194,9 @@ namespace nilolib {
         };
     };
 
-    std::ostream &operator<<(std::ostream &os, const ArrayList &list) {
-        for (int i = 0; i < list.size(); i++) {
-            os << list[i] << ",";
+    std::ostream &operator<<(std::ostream &os, ArrayList &list) {
+        for(auto value : list){
+            os << value << ",";
         }
         return os << "\b";
     }
