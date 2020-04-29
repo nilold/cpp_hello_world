@@ -6,22 +6,24 @@
 namespace nilolib {
     class ArrayList {
     public:
-    class iterator : public std::iterator<std::random_access_iterator_tag, int>{
+        class iterator : public std::iterator<std::random_access_iterator_tag, int> {
         private:
             ArrayList *m_arrayList{nullptr};
             int m_pos{0};
 
         public:
             iterator(ArrayList &arrayList, int pos) : m_arrayList(&arrayList), m_pos(pos) {}
+
             iterator(const iterator &it) = default;
+
             iterator() = delete;
 
-            inline int& operator*() const {return m_arrayList->get(m_pos);}
-            inline int* operator->() const {return &operator*();}
-//            inline int* operator->() const {return &(*(*this));}
+            inline int &operator*() const { return m_arrayList->get(m_pos); }
 
-            inline iterator& operator=(const iterator &it){
-                if(this == &it){
+            inline int *operator->() const { return &operator*(); }
+
+            inline iterator &operator=(const iterator &it) {
+                if (this == &it) {
                     return *this;
                 }
 
@@ -31,57 +33,76 @@ namespace nilolib {
                 return *this;
             }
 
-            inline iterator& operator++() {
-                assert(m_pos < m_arrayList->size());
+            inline iterator &operator++() {
                 ++m_pos;
                 return *this;
             }
 
-            inline iterator& operator--() {
-                assert(m_pos > 0);
+            inline iterator &operator--() {
                 --m_pos;
                 return *this;
             }
 
-            inline iterator operator++(int){
-                assert(m_pos < m_arrayList->size());
+            inline iterator operator++(int) {
                 iterator tmp(*this);
                 ++m_pos;
                 return tmp;
             }
 
             inline iterator operator--(int) {
-                assert(m_pos > 0);
                 iterator tmp(*this);
                 --m_pos;
                 return tmp;
             }
 
-            inline iterator& operator+=(int rhs) {m_pos += rhs; return *this;}
-            inline iterator& operator-=(int rhs) {m_pos -= rhs; return *this;}
-
-            inline int& operator[](int pos) const { return m_arrayList->get(pos);}
-
-            inline iterator& operator+(int offset) {
-                assert(m_pos < m_arrayList->size() - offset);
-                m_pos += offset;
+            inline iterator &operator+=(int rhs) {
+                std::cout << "shift " << rhs << " positions right" << std::endl;
+                m_pos += rhs;
                 return *this;
             }
 
-            inline iterator& operator-(int offset) {
-                assert(m_pos > offset);
-                m_pos -= offset;
+            inline iterator &operator-=(int rhs) {
+                std::cout << "shift " << rhs << " positions left" << std::endl;
+                m_pos -= rhs;
                 return *this;
             }
 
-            inline int operator-(const iterator &other) const {return m_pos - other.m_pos;}
+            inline iterator operator+(int offset) const{
+                iterator tmp(*this);
+                tmp.m_pos += offset;
+                return tmp;
+            }
 
-            inline bool operator==(const iterator &other) const {return m_pos == other.m_pos;}
-            inline bool operator!=(const iterator &other) const {return m_pos != other.m_pos;}
-            inline bool operator>(const iterator &other) const {return m_pos > other.m_pos;}
-            inline bool operator>=(const iterator &other) const {return m_pos >= other.m_pos;}
-            inline bool operator<(const iterator &other) const {return m_pos < other.m_pos;}
-            inline bool operator<=(const iterator &other) const {return m_pos <= other.m_pos;}
+            inline iterator operator-(int offset) {
+                iterator tmp(*this);
+                tmp.m_pos -= offset;
+                return tmp;
+            }
+
+            inline int operator-(const iterator other) const{
+                return m_pos - other.m_pos;
+            }
+
+            inline iterator operator+(const iterator &other) const {
+                iterator tmp(*this);
+                tmp.m_pos += other.m_pos;
+                return tmp;
+            }
+
+
+            inline int &operator[](int pos) const { return m_arrayList->get(pos); }
+
+            inline bool operator==(const iterator &other) const { return m_pos == other.m_pos; }
+
+            inline bool operator!=(const iterator &other) const { return m_pos != other.m_pos; }
+
+            inline bool operator>(const iterator &other) const { return m_pos > other.m_pos; }
+
+            inline bool operator>=(const iterator &other) const { return m_pos >= other.m_pos; }
+
+            inline bool operator<(const iterator &other) const { return m_pos < other.m_pos; }
+
+            inline bool operator<=(const iterator &other) const { return m_pos <= other.m_pos; }
         };
 
         ArrayList() : m_array(new int[10]), capacity(10) {};
@@ -138,7 +159,7 @@ namespace nilolib {
         }
 
         iterator end() noexcept {
-            return iterator(*this, size()-1);
+            return iterator(*this, size());
         }
 
         void add(const int &value) {
@@ -195,7 +216,7 @@ namespace nilolib {
     };
 
     std::ostream &operator<<(std::ostream &os, ArrayList &list) {
-        for(auto value : list){
+        for (auto value : list) {
             os << value << ",";
         }
         return os << "\b";
