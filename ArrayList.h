@@ -11,7 +11,7 @@ namespace nilolib {
 
         class iterator;
 
-        ArrayList() : m_array(new T[10]), capacity(10) {std::cout << "default constructor called" << std::endl;};
+        ArrayList() : m_array(new T[10]), capacity(10) { std::cout << "default constructor called" << std::endl; };
 
         explicit ArrayList(int initialCapacity) : m_array(new T[initialCapacity]), capacity(initialCapacity) {
             std::cout << "constructor called" << std::endl;
@@ -22,7 +22,9 @@ namespace nilolib {
             m_size = other.m_size;
             capacity = other.capacity;
             m_array = new T[m_size];
-            memcpy(m_array, other.m_array, m_size);
+            for (unsigned i = 0; i < m_size; ++i) {
+                m_array[i] = other.m_array[i];
+            }
         }
 
         ArrayList(ArrayList &&other) noexcept {

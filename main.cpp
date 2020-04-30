@@ -5,6 +5,12 @@
 #include <unordered_set>
 #include "ArrayList.h"
 #include "design-patterns/adapter.h"
+#include "design-patterns/observer.h"
+
+//class Publisher;
+//class Listener;
+//class ListenerA;
+//class listenerB;
 
 void useArrayList();
 void useVector();
@@ -13,6 +19,7 @@ void useSet();
 nilolib::ArrayList<int> makeIntArray(int);
 
 void useAdapter();
+void useObserver();
 
 namespace std {
     using namespace nilolib;
@@ -32,13 +39,22 @@ int main() {
 //    useVector();
 //    useUnorderedSet();
 //    useSet();
-    useAdapter();
+//    useAdapter();
+    useObserver();
+}
+
+void useObserver()
+{
+    nilolib::Publisher publisher;
+    auto listenerA = std::make_shared<nilolib::ListenerA>(publisher);
+    auto listenerB = std::make_shared<nilolib::ListenerB>(publisher);
+
+    publisher.doSomething();
+
 }
 
 void useAdapter(){
     nilolib::String str("Hi Nilo Serafim Neto");
-
-//    auto words_vector_ptr = str.split();
 
     for(auto &it : str.split())
         std::cout << it << std::endl;

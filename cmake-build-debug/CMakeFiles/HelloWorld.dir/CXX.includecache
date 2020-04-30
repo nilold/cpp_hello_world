@@ -18,6 +18,14 @@ vector
 string
 /Users/niloneto/CLionProjects/HelloWorld/design-patterns/string
 
+/Users/niloneto/CLionProjects/HelloWorld/design-patterns/observer.h
+string
+-
+vector
+-
+iostream
+-
+
 /Users/niloneto/CLionProjects/HelloWorld/main.cpp
 iostream
 -
@@ -33,4 +41,6 @@ ArrayList.h
 /Users/niloneto/CLionProjects/HelloWorld/ArrayList.h
 design-patterns/adapter.h
 /Users/niloneto/CLionProjects/HelloWorld/design-patterns/adapter.h
+design-patterns/observer.h
+/Users/niloneto/CLionProjects/HelloWorld/design-patterns/observer.h
 

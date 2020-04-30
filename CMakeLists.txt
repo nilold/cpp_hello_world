@@ -3,4 +3,4 @@ project(HelloWorld)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(HelloWorld main.cpp ArrayList.h design-patterns/adapter.h)
+add_executable(HelloWorld main.cpp ArrayList.h design-patterns/adapter.h design-patterns/builder.h design-patterns/observer.h)

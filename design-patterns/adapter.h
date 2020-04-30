@@ -16,9 +16,7 @@ namespace nilolib{
 
         ArrayList<std::string> split(const std::string &delimiter=" ") const{
 
-//            auto output = std::make_unique<ArrayList<std::string>>(5);
-//            auto output = ArrayList<std::string>(5);
-            auto output = new ArrayList<std::string>(5);
+            auto output = std::make_unique<ArrayList<std::string>>(5);
 
             size_t last = 0;
             size_t next = 0;

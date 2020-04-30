@@ -86,6 +86,12 @@
 		<Unit filename="/Users/niloneto/CLionProjects/HelloWorld/design-patterns/adapter.h">
 			<Option target="HelloWorld"/>
 		</Unit>
+		<Unit filename="/Users/niloneto/CLionProjects/HelloWorld/design-patterns/builder.h">
+			<Option target="HelloWorld"/>
+		</Unit>
+		<Unit filename="/Users/niloneto/CLionProjects/HelloWorld/design-patterns/observer.h">
+			<Option target="HelloWorld"/>
+		</Unit>
 		<Unit filename="/Users/niloneto/CLionProjects/HelloWorld/main.cpp">
 			<Option target="HelloWorld"/>
 		</Unit>

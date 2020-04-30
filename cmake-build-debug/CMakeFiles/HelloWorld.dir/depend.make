@@ -3,5 +3,6 @@
 
 CMakeFiles/HelloWorld.dir/main.cpp.o: ../ArrayList.h
 CMakeFiles/HelloWorld.dir/main.cpp.o: ../design-patterns/adapter.h
+CMakeFiles/HelloWorld.dir/main.cpp.o: ../design-patterns/observer.h
 CMakeFiles/HelloWorld.dir/main.cpp.o: ../main.cpp
 
