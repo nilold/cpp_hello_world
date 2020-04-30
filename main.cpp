@@ -4,6 +4,7 @@
 #include <set>
 #include <unordered_set>
 #include "ArrayList.h"
+#include "design-patterns/adapter.h"
 
 void useArrayList();
 void useVector();
@@ -11,39 +12,62 @@ void useUnorderedSet();
 void useSet();
 nilolib::ArrayList<int> makeIntArray(int);
 
-//namespace std {
-//    using namespace nilolib;
-//
-//    template<>
-//    class hash<ArrayList<int>> {
-//    public:
-//        size_t operator()(const ArrayList<int> &a) const {
-//            cout << "hash" << endl;
-//            return hash<int>()(a.size());
-//        }
-//    };
-//}
+void useAdapter();
+
+namespace std {
+    using namespace nilolib;
+
+    template<>
+    class hash<ArrayList<int>> {
+    public:
+        size_t operator()(const ArrayList<int> &a) const {
+            cout << "hash" << endl;
+            return hash<int>()(a.size());
+        }
+    };
+}
 
 int main() {
 //    useArrayList();
 //    useVector();
 //    useUnorderedSet();
-    useSet();
+//    useSet();
+    useAdapter();
 }
 
-void useUnorderedSet(){
-    std::unordered_set<nilolib::ArrayList<int>> s;
+void useAdapter(){
+    nilolib::String str("Hi Nilo Serafim Neto");
 
-    s.insert(makeIntArray(15));
+//    auto words_vector_ptr = str.split();
 
+    for(auto &it : str.split())
+        std::cout << it << std::endl;
 }
+
+//void useUnorderedSet(){
+//    std::unordered_set<nilolib::ArrayList<int>> s;
+//
+//    s.insert(makeIntArray(15));
+//    s.insert(makeIntArray(15));
+//    s.insert(makeIntArray(15));
+////    s.insert(makeIntArray(15));
+////    s.insert(makeIntArray(15));
+//
+//}
 
 void useSet(){
     std::set<nilolib::ArrayList<int>> s;
 
     s.insert(makeIntArray(15));
+    s.insert(makeIntArray(12));
     s.insert(makeIntArray(15));
-
+    s.insert(makeIntArray(15));
+    s.insert(makeIntArray(15));
+    s.insert(makeIntArray(15));
+    s.insert(makeIntArray(12));
+    s.insert(makeIntArray(12));
+    s.insert(makeIntArray(12));
+    s.insert(makeIntArray(10));
 }
 
 nilolib::ArrayList<int> makeIntArray(int size){

@@ -7,17 +7,21 @@ namespace nilolib {
     template<typename T>
     class ArrayList {
     public:
+        static int id;
+
         class iterator;
 
-        ArrayList() : m_array(new T[10]), capacity(10) {};
+        ArrayList() : m_array(new T[10]), capacity(10) {std::cout << "default constructor called" << std::endl;};
 
-        explicit ArrayList(int initialCapacity) : m_array(new T[initialCapacity]), capacity(initialCapacity) {};
+        explicit ArrayList(int initialCapacity) : m_array(new T[initialCapacity]), capacity(initialCapacity) {
+            std::cout << "constructor called" << std::endl;
+        };
 
         ArrayList(const ArrayList &other) {
             std::cout << "Copy constructor called" << std::endl;
             m_size = other.m_size;
             capacity = other.capacity;
-            m_array = new int[m_size];
+            m_array = new T[m_size];
             memcpy(m_array, other.m_array, m_size);
         }
 
@@ -118,7 +122,7 @@ namespace nilolib {
 
         bool operator==(const ArrayList<T> &other) const {
             std::cout << "==" << std::endl;
-            return size() == other.size();
+            return size() == other.size() && (size() > 0 && other.size() > 0) ? get(0) == other.get(0) : true;
         }
 
         bool operator!=(const ArrayList<T> &other) const {
@@ -143,6 +147,7 @@ namespace nilolib {
         };
     };
 
+    template<> int ArrayList<int>::id = 0;
 
     template<typename T>
     class ArrayList<T>::iterator : public std::iterator<std::random_access_iterator_tag, T> {
