@@ -1,13 +1,12 @@
-//
-// Created by Nilo Neto on 4/30/20.
-//
-
 #ifndef HELLOWORLD_OBSERVER_H
 #define HELLOWORLD_OBSERVER_H
 
 #include<string>
 #include <vector>
 #include <iostream>
+#include <thread>
+#include <chrono>
+#include <stack>
 
 namespace nilolib {
     class Listener {
@@ -24,7 +23,7 @@ namespace nilolib {
         }
 
     public:
-        void addListener(nilolib::Listener* lis) {
+        void addListener(nilolib::Listener *lis) {
             listeners.push_back(lis);
         }
 
@@ -34,14 +33,27 @@ namespace nilolib {
 
     };
 
+    class Topic : public Listener {
+        std::stack<std::string> messagesStack;
+
+
+
+    };
+
     class ListenerA : public Listener {
+        unsigned m_delay;
+        unsigned m_id;
     public:
-        explicit ListenerA(Publisher &pub) {
+        explicit ListenerA(Publisher &pub, unsigned id, unsigned maxDelay = 1) {
             pub.addListener(this);
+            m_id = id;
+            m_delay = maxDelay;
         }
 
         void onEvent(std::string msg) override {
-            std::cout << "Listener A received <" << msg << "> from publisher" << std::endl;
+            std::cout << "Listener " << m_id << " received" << msg << std::endl;
+            std::this_thread::sleep_for(std::chrono::seconds(random() % m_delay));
+            std::cout << "Listener " << m_id << " finished" << msg << std::endl;
         }
     };
 

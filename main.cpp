@@ -2,24 +2,31 @@
 #include <algorithm>
 #include <vector>
 #include <set>
-#include <unordered_set>
+#include <functional>
 #include "ArrayList.h"
 #include "design-patterns/adapter.h"
 #include "design-patterns/observer.h"
-
-//class Publisher;
-//class Listener;
-//class ListenerA;
-//class listenerB;
+#include "design-patterns/visitor.h"
 
 void useArrayList();
+
 void useVector();
+
 void useUnorderedSet();
+
 void useSet();
+
 nilolib::ArrayList<int> makeIntArray(int);
 
 void useAdapter();
+
 void useObserver();
+
+void useVisitor();
+
+void usePubSub();
+
+void useLambda();
 
 namespace std {
     using namespace nilolib;
@@ -40,23 +47,78 @@ int main() {
 //    useUnorderedSet();
 //    useSet();
 //    useAdapter();
-    useObserver();
+//    useObserver();
+    useVisitor();
+//    usePubSub();
+//    useLambda();
 }
 
-void useObserver()
-{
+bool printAndCallback(int a, int b, const std::function<bool(int, int)> &callback) {
+    std::cout << "Called with values " << a << " and " << b << std::endl;
+    return callback(a, b);
+}
+
+void useLambda() {
+    std::string operation = "mul";
+
+    std::function<bool(int, int)> callback = [&](int a, int b) -> bool {
+        if (operation == "some") {
+            std::cout << "The value is: " << a + b << std::endl;
+            return true;
+        } else if (operation == "mul") {
+            std::cout << "The value is: " << a * b << std::endl;
+            return true;
+        } else {
+            std::cout << "Invalid operation: " << operation << std::endl;
+            return false;
+        }
+    };
+
+    bool success = printAndCallback(3, 5, callback);
+}
+
+void usePubSub() {
+
+    //create publishers
+    unsigned pubNum = 4;
+    std::vector<nilolib::Publisher> publishers;
+    publishers.reserve(pubNum);
+    for (int i = 0; i < pubNum; ++i) {
+        publishers.emplace_back(nilolib::Publisher());
+    }
+
+    //create consumers
+
+}
+
+void useVisitor() {
+    nilolib::HotelOfferVisitor hotelVisitor;
+    nilolib::GasOfferVisitor gasOfferVisitor;
+
+    nilolib::BronzeCreditCard bronzeCreditCard;
+    nilolib::SilverCreditCard silverCreditCard;
+
+    bronzeCreditCard.accept(hotelVisitor);
+    bronzeCreditCard.accept(gasOfferVisitor);
+
+    silverCreditCard.accept(hotelVisitor);
+    silverCreditCard.accept(gasOfferVisitor);
+}
+
+void useObserver() {
     nilolib::Publisher publisher;
-    auto listenerA = std::make_shared<nilolib::ListenerA>(publisher);
+
+    auto listenerA = std::make_shared<nilolib::ListenerA>(publisher, 1);
     auto listenerB = std::make_shared<nilolib::ListenerB>(publisher);
 
     publisher.doSomething();
 
 }
 
-void useAdapter(){
+void useAdapter() {
     nilolib::String str("Hi Nilo Serafim Neto");
 
-    for(auto &it : str.split())
+    for (auto &it : str.split())
         std::cout << it << std::endl;
 }
 
@@ -71,7 +133,7 @@ void useAdapter(){
 //
 //}
 
-void useSet(){
+void useSet() {
     std::set<nilolib::ArrayList<int>> s;
 
     s.insert(makeIntArray(15));
@@ -86,15 +148,15 @@ void useSet(){
     s.insert(makeIntArray(10));
 }
 
-nilolib::ArrayList<int> makeIntArray(int size){
+nilolib::ArrayList<int> makeIntArray(int size) {
     nilolib::ArrayList<int> a(size);
-    for(unsigned i=0; i<size; i++){
+    for (unsigned i = 0; i < size; i++) {
         a.add(random());
     }
     return a;
 }
 
-void useVector(){
+void useVector() {
     std::vector<int> myVector;
 
     myVector.push_back(3);
@@ -106,7 +168,7 @@ void useVector(){
 
     std::sort(myVector.begin(), myVector.end());
 
-    for(auto it : myVector){
+    for (auto it : myVector) {
         std::cout << it << std::endl;
     }
 

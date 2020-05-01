@@ -25,6 +25,18 @@ vector
 -
 iostream
 -
+thread
+-
+chrono
+-
+stack
+-
+
+/Users/niloneto/CLionProjects/HelloWorld/design-patterns/visitor.h
+string
+-
+iostream
+-
 
 /Users/niloneto/CLionProjects/HelloWorld/main.cpp
 iostream
@@ -35,7 +47,7 @@ vector
 -
 set
 -
-unordered_set
+functional
 -
 ArrayList.h
 /Users/niloneto/CLionProjects/HelloWorld/ArrayList.h
@@ -43,4 +55,6 @@ design-patterns/adapter.h
 /Users/niloneto/CLionProjects/HelloWorld/design-patterns/adapter.h
 design-patterns/observer.h
 /Users/niloneto/CLionProjects/HelloWorld/design-patterns/observer.h
+design-patterns/visitor.h
+/Users/niloneto/CLionProjects/HelloWorld/design-patterns/visitor.h
 
