@@ -6,8 +6,14 @@
 
 #IncludeRegexTransform: 
 
-/Users/niloneto/CLionProjects/HelloWorld/ArrayList.h
+/Users/niloneto/CLionProjects/HelloWorld/data-structures/ArrayList.h
 ostream
+-
+
+/Users/niloneto/CLionProjects/HelloWorld/data-structures/heap.h
+vector
+-
+stdexcept
 -
 
 /Users/niloneto/CLionProjects/HelloWorld/design-patterns/adapter.h
@@ -49,8 +55,10 @@ set
 -
 functional
 -
-ArrayList.h
-/Users/niloneto/CLionProjects/HelloWorld/ArrayList.h
+data-structures/ArrayList.h
+/Users/niloneto/CLionProjects/HelloWorld/data-structures/ArrayList.h
+data-structures/heap.h
+/Users/niloneto/CLionProjects/HelloWorld/data-structures/heap.h
 design-patterns/adapter.h
 /Users/niloneto/CLionProjects/HelloWorld/design-patterns/adapter.h
 design-patterns/observer.h

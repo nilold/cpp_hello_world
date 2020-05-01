@@ -3,7 +3,8 @@
 #include <vector>
 #include <set>
 #include <functional>
-#include "ArrayList.h"
+#include "data-structures/ArrayList.h"
+#include "data-structures/heap.h"
 #include "design-patterns/adapter.h"
 #include "design-patterns/observer.h"
 #include "design-patterns/visitor.h"
@@ -15,6 +16,8 @@ void useVector();
 void useUnorderedSet();
 
 void useSet();
+
+void useHeap();
 
 nilolib::ArrayList<int> makeIntArray(int);
 
@@ -48,9 +51,12 @@ int main() {
 //    useSet();
 //    useAdapter();
 //    useObserver();
-    useVisitor();
+//    useVisitor();
 //    usePubSub();
 //    useLambda();
+    useHeap();
+
+    return 0;
 }
 
 bool printAndCallback(int a, int b, const std::function<bool(int, int)> &callback) {
@@ -88,6 +94,29 @@ void usePubSub() {
     }
 
     //create consumers
+
+}
+
+void useHeap() {
+    std::cout << "using heap" << std::endl;
+    nilolib::Heap<int> heap(10);
+
+    heap.insert(80);
+    heap.insert(75);
+    heap.insert(60);
+    heap.insert(68);
+    heap.insert(55);
+    heap.insert(40);
+    heap.insert(52);
+    heap.insert(67);
+
+    heap.printHeap();
+    heap.remove(0);
+
+    heap.sort();
+    heap.printHeap();
+
+    std::cout << heap.peek() << std::endl;
 
 }
 

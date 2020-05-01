@@ -93,5 +93,4 @@ namespace nilolib {
 
 }
 
-
 #endif //HELLOWORLD_VISITOR_H

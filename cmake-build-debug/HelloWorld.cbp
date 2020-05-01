@@ -80,7 +80,10 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/niloneto/CLionProjects/HelloWorld/ArrayList.h">
+		<Unit filename="/Users/niloneto/CLionProjects/HelloWorld/data-structures/ArrayList.h">
+			<Option target="HelloWorld"/>
+		</Unit>
+		<Unit filename="/Users/niloneto/CLionProjects/HelloWorld/data-structures/heap.h">
 			<Option target="HelloWorld"/>
 		</Unit>
 		<Unit filename="/Users/niloneto/CLionProjects/HelloWorld/design-patterns/adapter.h">
