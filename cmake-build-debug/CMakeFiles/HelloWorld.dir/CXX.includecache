@@ -47,6 +47,8 @@ iostream
 /Users/niloneto/CLionProjects/HelloWorld/main.cpp
 iostream
 -
+sstream
+-
 algorithm
 -
 vector
@@ -65,4 +67,8 @@ design-patterns/observer.h
 /Users/niloneto/CLionProjects/HelloWorld/design-patterns/observer.h
 design-patterns/visitor.h
 /Users/niloneto/CLionProjects/HelloWorld/design-patterns/visitor.h
+fstream
+-
+sstream
+-
 

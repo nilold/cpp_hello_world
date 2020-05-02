@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 #include <algorithm>
 #include <vector>
 #include <set>
@@ -44,7 +45,94 @@ namespace std {
     };
 }
 
+#include <fstream>
+#include <sstream>
+
+void writeFiles() {
+//    std::ofstream outFile;
+    std::fstream outFile;
+
+
+    std::string outputFileName = "myFile.txt";
+
+    outFile.open(outputFileName, std::ios::out);
+
+    if (outFile.is_open()) {
+        outFile << "Hello there" << std::endl << "New line" << std::endl;
+        outFile << "Hello there again!" << std::endl << "New line again!" << std::endl;
+        outFile.close();
+    } else {
+        std::cout << "Could not create file: " << outputFileName << std::endl;
+    }
+}
+
+void readFiles() {
+    std::ifstream inFile;
+    std::string outputFileName = "myFile.txt";
+
+    inFile.open(outputFileName);
+
+    std::string line;
+
+    if (inFile.is_open()) {
+        while (!inFile) {
+            std::getline(inFile, line);
+            std::cout << line << std::endl;
+        }
+
+
+        inFile.close();
+    } else {
+        std::cout << "Could not create file: " << outputFileName << std::endl;
+    }
+}
+
+void parseFiles() {
+    std::ifstream inFile;
+    std::string outputFileName = "myFile.txt";
+
+    inFile.open(outputFileName);
+
+    if (inFile.is_open()) {
+        while (inFile) {
+            std::string line;
+            std::getline(inFile, line);
+
+            if(!inFile) break;
+
+            std::stringstream lineStream(line);
+
+            std::string country;
+            std::string population;
+            std::string otherNum;
+            std::string anotherNum;
+
+            std::getline(lineStream, country, ',');
+            std::getline(lineStream, population, ',');
+            std::getline(lineStream, otherNum, ',');
+            std::getline(lineStream, anotherNum, ',');
+
+//            lineStream >> std::ws; // discard the newline char (c++11)
+
+            std::cout
+            << country << " -- "
+            << population << " -- "
+            << otherNum << " -- "
+            << anotherNum
+            << std::endl;
+        }
+
+        inFile.close();
+    } else {
+        std::cout << "Could not create file: " << outputFileName << std::endl;
+    }
+}
+
+
 int main() {
+//    writeFiles();
+//    readFiles();
+//    parseFiles();
 //    useArrayList();
 //    useVector();
 //    useUnorderedSet();
@@ -54,7 +142,8 @@ int main() {
 //    useVisitor();
 //    usePubSub();
 //    useLambda();
-    useHeap();
+//    useHeap();
+
 
     return 0;
 }
