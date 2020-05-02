@@ -32,6 +32,10 @@ void usePubSub();
 
 void useLambda();
 
+void writeBinFile();
+
+void readBinFile();
+
 namespace std {
     using namespace nilolib;
 
@@ -98,7 +102,7 @@ void parseFiles() {
             std::string line;
             std::getline(inFile, line);
 
-            if(!inFile) break;
+            if (!inFile) break;
 
             std::stringstream lineStream(line);
 
@@ -115,11 +119,11 @@ void parseFiles() {
 //            lineStream >> std::ws; // discard the newline char (c++11)
 
             std::cout
-            << country << " -- "
-            << population << " -- "
-            << otherNum << " -- "
-            << anotherNum
-            << std::endl;
+                    << country << " -- "
+                    << population << " -- "
+                    << otherNum << " -- "
+                    << anotherNum
+                    << std::endl;
         }
 
         inFile.close();
@@ -128,9 +132,19 @@ void parseFiles() {
     }
 }
 
+#pragma pack(push, 1)
+struct Person {
+    char name[50];
+    int age;
+    double height;
+};
+#pragma pack(pop)
 
 int main() {
-//    writeFiles();
+
+//    writeBinFile();
+    readBinFile();
+    //    writeFiles();
 //    readFiles();
 //    parseFiles();
 //    useArrayList();
@@ -146,6 +160,44 @@ int main() {
 
 
     return 0;
+}
+
+void readBinFile() {
+    Person someone = {};
+
+    std::string fileName = "bin_data.bin";
+
+    std::ifstream input;
+
+    input.open(fileName, std::ios::binary);
+
+    if (input.is_open()) {
+        input.read(reinterpret_cast<char *>(&someone), sizeof(Person));
+
+        input.close();
+    } else {
+        std::cout << "Could not create file: " << fileName << std::endl;
+    }
+
+    std::cout << someone.name << "," << someone.age << "," << someone.height << std::endl;
+}
+
+void writeBinFile() {
+    Person someone = {"Nilo Serafim Neto", 33, 1.72};
+
+    std::string fileName = "bin_data.bin";
+
+    std::ofstream output;
+
+    output.open(fileName, std::ios::binary);
+
+    if (output.is_open()) {
+        output.write(reinterpret_cast<char *>(&someone), sizeof(Person));
+
+        output.close();
+    } else {
+        std::cout << "Could not create file: " << fileName << std::endl;
+    }
 }
 
 bool printAndCallback(int a, int b, const std::function<bool(int, int)> &callback) {
